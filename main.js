@@ -39,7 +39,7 @@ bgMusic.loop = true
 const winMusic = new Audio('./music/win.mp3')
 const loseMusic = new Audio('./music/lose.mp3')
 
-loader.load( './model/scene.gltf', function ( gltf ){
+loader.load( './model/scene.gltf', function ( gltf ){ // 인형 로드
     scene.add( gltf.scene )
     doll = gltf.scene
     // gltf.scene.position.set(0,-1, 0)
@@ -85,6 +85,17 @@ class Player {
         player.position.x = start_position - .4
         player.position.z = 1
         player.position.y = posY
+
+        // // ---- 캐릭터 삽입 ---- //
+        // let player
+        // loader.load( './player/scene.gltf', function ( gltf ){
+        //     scene.add(gltf.scene)
+        //     player = gltf.scene
+        //     gltf.scene.position.set(start_position - .4, 1, posY)
+        //     console.log(player)
+        // })
+        // console.log(player)
+
         this.player = player
         this.playerInfo = {
             positionX: start_position - .4,
@@ -139,7 +150,7 @@ class Player {
         this.check()
         this.playerInfo.positionX -= this.playerInfo.velocity
         this.player.position.x = this.playerInfo.positionX
-        camera.position.x -= this.playerInfo.velocity //
+        camera.position.x -= this.playerInfo.velocity // 1인칭 (없애면 전체시점)
     }
 }
 
