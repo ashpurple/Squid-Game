@@ -78,25 +78,22 @@ createCube({w: .2, h: 1.5, d: 1}, end_position, .4)
 
 class Player {
     constructor(name = "Player", radius = .25, posY = 0, color = 0xffffff){
-        const geometry = new THREE.SphereGeometry( radius, 100, 100 )
-        const material = new THREE.MeshBasicMaterial( { color } )
-        const player = new THREE.Mesh( geometry, material )
-        scene.add( player )
-        player.position.x = start_position - .4
-        player.position.z = 1
-        player.position.y = posY
+        // const geometry = new THREE.SphereGeometry( radius, 100, 100 )
+        // const material = new THREE.MeshBasicMaterial( { color } )
+        // const player = new THREE.Mesh( geometry, material )
+        // scene.add( player )
+        // player.position.x = start_position - .4
+        // player.position.z = 1
+        // player.position.y = posY
 
         // // ---- 캐릭터 삽입 ---- //
-        // let player
-        // loader.load( './player/scene.gltf', function ( gltf ){
-        //     scene.add(gltf.scene)
-        //     player = gltf.scene
-        //     gltf.scene.position.set(start_position - .4, 1, posY)
-        //     console.log(player)
-        // })
-        // console.log(player)
+        
+        loader.load( './player/scene.gltf', ( gltf )=>{
+            scene.add(gltf.scene)
+            player = gltf.scene
+            gltf.scene.position.set(start_position - .4, 1, posY)
+        })
 
-        this.player = player
         this.playerInfo = {
             positionX: start_position - .4,
             velocity: 0,
@@ -185,7 +182,7 @@ async function init(){
     lookBackward()
     await delay(500)
     text.innerText = "Gooo!!!"
-    bgMusic.play()
+    // bgMusic.play()                       // 브금 시끄러워서 끔
     start()
 }
 
