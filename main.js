@@ -5,7 +5,7 @@ import * as THREE from '../node_modules/three/build/three.module.js';
 let doll
 const TIME_LIMIT = 15
 const text = document.querySelector('.text')
-
+const text_time = document.querySelector('.time')
 let DEAD_PLAYERS = 0
 let SAFE_PLAYERS = 0
 const startBtn = document.querySelector('.startBtn')
@@ -22,7 +22,6 @@ async function main() {
 
   const TIME_LIMIT = 15
   
-
   startBtn.addEventListener('click', () => {
       if(startBtn.innerText == "START"){
           init()
@@ -48,11 +47,13 @@ async function main() {
 }
 
 async function startDall(){
-  world.doll.lookBackward()
-  await delay((Math.random() * 1500) + 1500)
-  world.doll.lookForward()
-  await delay((Math.random() * 750) + 750)
-  startDall()
+  if(world.gameStat != "ended"){
+    world.doll.lookBackward()
+    await delay((Math.random() * 1500) + 1500)
+    world.doll.lookForward()
+    await delay((Math.random() * 750) + 750)
+    startDall()
+  }
 }
 
 function createCube(size, posX, rotY = 0, color = 0xfbc851){
@@ -65,17 +66,37 @@ function createCube(size, posX, rotY = 0, color = 0xfbc851){
   return cube
 }
 
+async function timer(time){
+  var startTimer
+  var sec
+  var milli
+  startTimer = setInterval(function(){
+    time-=10
+    sec = Math.floor(time/1000)
+    milli = (time%1000)/10
+    var ts = sec
+    var tm = milli
+    if(ts < 10){
+      ts = "0"+sec
+    }
+    if(world.gameStat != "ended"){
+      text_time.innerText = ts + ":" + tm
+    }
+  }, 10)
+}
+
 function start(){
   world.gameStat = "started"
-  const progressBar = createCube({w: 8, h: .1, d: 1}, 0, 0, 0xebaa12)
-  
-  progressBar.position.y = 3.35
-  gsap.to(progressBar.scale, {duration: TIME_LIMIT, x: 0, ease: "none"})
+  //const progressBar = createCube({w: 8, h: .1, d: 1}, 0, 0, 0xebaa12)
+  //progressBar.position.y = 3.35
+  //gsap.to(progressBar.scale, {duration: TIME_LIMIT, x: 0, ease: "none"})
+  timer(TIME_LIMIT * 1000)
   setTimeout(() => {
       if(world.gameStat != "ended"){
-          text.innerText = "Time Out!!!"
+          text.innerText = "Time Out"
           world.loseMusic.play()
           world.gameStat = "ended"
+          text_time.innerText = "00:00"
       }
   }, TIME_LIMIT * 1000)
   // startDall()
@@ -86,16 +107,16 @@ async function delay(ms){
 }
 
 async function init(){
-  await delay(50)
-  text.innerText = "Starting in 3"
-  await delay(50)
-  text.innerText = "Starting in 2"
-  await delay(50)
-  text.innerText = "Starting in 1"
+  await delay(500)
+  text.innerText = "3"
+  await delay(500)
+  text.innerText = "2"
+  await delay(500)
+  text.innerText = "1"
   // lookBackward()
-  await delay(50)
-  text.innerText = "Gooo!!!"
-  // bgMusic.play()                       // 브금 시끄러워서 끔
+  await delay(500)
+  text.innerText = "Start"
+  //world.bgMusic.play() // 브금 시끄러워서 끔
   start()
 }
 

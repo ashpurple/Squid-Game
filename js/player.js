@@ -42,6 +42,7 @@ class Player {
             this.stop()
             DEAD_PLAYERS++
             world.loseMusic.play()
+            world.gameStat = "ended"
         }
         if(this.playerInfo.positionX < end_position){
             text.innerText = this.playerInfo.name + " is safe!!!"
@@ -49,6 +50,7 @@ class Player {
             this.stop()
             SAFE_PLAYERS++
             world.winMusic.play()
+            world.gameStat = "ended"
         }
     }
 

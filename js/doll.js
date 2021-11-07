@@ -1,8 +1,6 @@
-import * as THREE from '../node_modules/three/build/three.module.js';
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
-const start_position = 6
-const end_position = -start_position
+const text = document.querySelector('.text')
 
 class Doll {
     constructor(name = "doll", radius = .25, posY = 0, color = 0xffffff){
@@ -18,13 +16,15 @@ class Doll {
     }
 
     lookBackward(){
-        // gsap.to(doll.rotation, {duration: .45, y: -3.15})
+
         gsap.to(this.dollObj.rotation, {duration: .45, y: 3.2}) //
+        text.innerText = "Go"
         setTimeout(() => this.dallFacingBack = true, 150)
     }
     lookForward(){
-        // gsap.to(doll.rotation, {duration: .45, y: 0})
+
         gsap.to(this.dollObj.rotation, {duration: .45, y: 0}) //
+        text.innerText = "Stop"
         setTimeout(() => this.dallFacingBack = false, 450)
     }
 
