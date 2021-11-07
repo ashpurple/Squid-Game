@@ -1,0 +1,23 @@
+{
+  "name": "cg_term_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashpurple/Squid-Game.git"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashpurple/Squid-Game/issues"
+  },
+  "homepage": "https://github.com/ashpurple/Squid-Game#readme",
+  "dependencies": {
+    "three": "^0.134.0"
+  }
+}

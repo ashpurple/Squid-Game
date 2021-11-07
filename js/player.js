@@ -1,13 +1,15 @@
+import * as THREE from '../node_modules/three/build/three.module.js';
+import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+
+const start_position = 6
+const end_position = -start_position
+const text = document.querySelector('.text')
+
+let DEAD_PLAYERS = 0
+let SAFE_PLAYERS = 0
+
 class Player {
     constructor(name = "Player", radius = .25, posY = 0, color = 0xffffff){
-        // const geometry = new THREE.SphereGeometry( radius, 100, 100 )
-        // const material = new THREE.MeshBasicMaterial( { color } )
-        // const player = new THREE.Mesh( geometry, material )
-        // scene.add( player )
-        // player.position.x = start_position - .4
-        // player.position.z = 1
-        // player.position.y = posY
-
         // // ---- 캐릭터 삽입 ---- //
 
         this.playerInfo = {
@@ -16,6 +18,10 @@ class Player {
             name,
             isDead: false
         }
+    }
+
+    getObj() {
+        return this.playerObj
     }
 
     run(){
@@ -27,61 +33,40 @@ class Player {
         gsap.to(this.playerInfo, { duration: .1, velocity: 0 })
     }
 
-    check(){
+    check(world){
+        let dallFacingBack = world.doll.getDollState()
         if(this.playerInfo.isDead) return
         if(!dallFacingBack && this.playerInfo.velocity > 0){
             text.innerText = this.playerInfo.name + " lost!!!"
             this.playerInfo.isDead = true
             this.stop()
             DEAD_PLAYERS++
-            loseMusic.play()
-            if(DEAD_PLAYERS == players.length){
-                text.innerText = "Everyone lost!!!"
-                gameStat = "ended"
-            }
-            if(DEAD_PLAYERS + SAFE_PLAYERS == players.length){
-                gameStat = "ended"
-            }
+            world.loseMusic.play()
         }
         if(this.playerInfo.positionX < end_position + .7){
             text.innerText = this.playerInfo.name + " is safe!!!"
             this.playerInfo.isDead = true
             this.stop()
             SAFE_PLAYERS++
-            winMusic.play()
-            if(SAFE_PLAYERS == players.length){
-                text.innerText = "Everyone is safe!!!"
-                gameStat = "ended"
-            }
-            if(DEAD_PLAYERS + SAFE_PLAYERS == players.length){
-                gameStat = "ended"
-            }
+            world.winMusic.play()
         }
     }
 
-    update(){
-        this.check()
+    update(world){
+        this.check(world)
         this.playerInfo.positionX -= this.playerInfo.velocity
-        this.player.position.x = this.playerInfo.positionX
-        camera.position.x -= this.playerInfo.velocity // 1인칭 (없애면 전체시점)
+        this.playerObj.position.x = this.playerInfo.positionX
+    }
+
+    async loadPlayer(radius = .25, posY = 0, color = 0xffffff) {
+        const loader = new GLTFLoader()
+    
+        const playerData = await Promise.all([loader.loadAsync('../resource/player/scene.gltf')])
+    
+        this.playerObj = playerData["0"]["scene"];
+        // console.log(playerObj)
+        this.playerObj.position.set(start_position - .4, 1, posY)
     }
 }
 
-async function loadPlayer() {
-    const loader = new GLTFLoader()
-
-    const playerData = await Promise.all(loader.loadAsync(./resouce/player/scene.gltf))
-
-    playerObj = playerData.scene.children[0];
-    playerObj.position.set(start_position - .4, 1, posY)
-
-    return playerObj
-
-    // loader.load( './resouce/player/scene.gltf', ( gltf )=>{
-    //     scene.add(gltf.scene)
-    //     player = gltf.scene
-    //     gltf.scene.position.set(start_position - .4, 1, posY)
-    // })
-}
-
-export {loadPlayer};
+export {Player};
