@@ -18,9 +18,9 @@ class World {
 
     this.camera = createCamera();
     this.renderer = createRenderer();
-    this.scene = createScene();
     this.loop = new Loop(this.camera, this.scene, this.renderer);
     container.append(this.renderer.domElement);
+    this.scene = createScene();
     this.controls = createControls(this.camera, this.renderer.domElement);
 
     this.gameStat = "Loading"
@@ -43,10 +43,16 @@ class World {
     let dollObj = this.doll.getObj()
 
     // move the target to the center of the front bird
+
     this.controls.target.copy(playerObj.position);
+    // this.controls.target.y = 3
+
+    console.log(this.controls.target)
 
     this.scene.add(dollObj);
     this.scene.add(playerObj);
+
+    // this.controls.target.set(0,0,0)
 
     startBtn.innerText = "start"
   }

@@ -16,9 +16,10 @@ class Loop {
       // tell every animated object to tick forward one frame
       this.tick();
       this.animate(world)
+      world.controls.update()
 
       // render a frame
-      this.renderer.render(this.scene, this.camera);
+      world.render(this.scene, this.camera);
 
       if(world.gameStat == "ended") {
         this.stop()

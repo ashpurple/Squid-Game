@@ -1,8 +1,8 @@
 import * as THREE from '../node_modules/three/build/three.module.js';
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
-const start_position = 6
-const end_position = -start_position
+const start_position = 5
+const end_position = - 8.7
 const text = document.querySelector('.text')
 
 let DEAD_PLAYERS = 0
@@ -43,7 +43,7 @@ class Player {
             DEAD_PLAYERS++
             world.loseMusic.play()
         }
-        if(this.playerInfo.positionX < end_position + .7){
+        if(this.playerInfo.positionX < end_position){
             text.innerText = this.playerInfo.name + " is safe!!!"
             this.playerInfo.isDead = true
             this.stop()
@@ -55,7 +55,7 @@ class Player {
     update(world){
         this.check(world)
         this.playerInfo.positionX -= this.playerInfo.velocity
-        this.playerObj.position.x = this.playerInfo.positionX
+        this.playerObj.position.z = this.playerInfo.positionX
     }
 
     async loadPlayer(radius = .25, posY = 0, color = 0xffffff) {
@@ -65,7 +65,8 @@ class Player {
     
         this.playerObj = playerData["0"]["scene"];
         // console.log(playerObj)
-        this.playerObj.position.set(start_position - .4, 1, posY)
+        this.playerObj.position.set(1, -1, 0)
+        this.playerObj.rotation.y = 3.2
     }
 }
 

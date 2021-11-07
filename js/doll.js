@@ -19,12 +19,12 @@ class Doll {
 
     lookBackward(){
         // gsap.to(doll.rotation, {duration: .45, y: -3.15})
-        gsap.to(this.dollObj.rotation, {duration: .45, y: -1.6}) //
+        gsap.to(this.dollObj.rotation, {duration: .45, y: 3.2}) //
         setTimeout(() => this.dallFacingBack = true, 150)
     }
     lookForward(){
         // gsap.to(doll.rotation, {duration: .45, y: 0})
-        gsap.to(this.dollObj.rotation, {duration: .45, y: 1.6}) //
+        gsap.to(this.dollObj.rotation, {duration: .45, y: 0}) //
         setTimeout(() => this.dallFacingBack = false, 450)
     }
 
@@ -40,7 +40,6 @@ class Doll {
         // this.dollObj.rotation.y = 1.6
         // this.dollObj.scale.set(0.4, 0.4, 0.4)
         this.dollObj.position.set(0, 0, -10) //
-        this.dollObj.rotation.y = 1.6 //
         this.dollObj.scale.set(0.2, 0.2, 0.2)
 
         // console.log(playerObj)
