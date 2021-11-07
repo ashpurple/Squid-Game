@@ -68,6 +68,7 @@ function createCube(size, posX, rotY = 0, color = 0xfbc851){
 function start(){
   world.gameStat = "started"
   const progressBar = createCube({w: 8, h: .1, d: 1}, 0, 0, 0xebaa12)
+  
   progressBar.position.y = 3.35
   gsap.to(progressBar.scale, {duration: TIME_LIMIT, x: 0, ease: "none"})
   setTimeout(() => {

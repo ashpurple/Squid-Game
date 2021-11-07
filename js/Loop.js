@@ -45,7 +45,7 @@ class Loop {
 
   animate(world){
     world.player.update(world)
-    this.camera.position.x -= world.player.playerInfo.velocity // 1인칭 (없애면 전체시점)
+    //this.camera.position.x -= world.player.playerInfo.velocity // 1인칭 (없애면 전체시점)
     // players.map(player => player.player.update()) 
   }
 
