@@ -1,5 +1,6 @@
 import { World } from './js/World.js';
 import * as THREE from '../node_modules/three/build/three.module.js';
+import { Loop } from './js/Loop.js';
 
 
 let doll
@@ -12,6 +13,7 @@ const startBtn = document.querySelector('.startBtn')
 
 const container = document.querySelector('#scene-container');
 const world = new World(container);
+var viewPoint = 0
 
 async function main() {
   // Get a reference to the container element
@@ -47,6 +49,11 @@ async function main() {
     }
     if(e.key == "d"){
       world.player.d_run()
+    }
+    if(e.key == "p"){
+      viewPoint++
+      world.viewPoint = viewPoint % 3
+      world.loop.updateCamera(world)
     }
 
   })

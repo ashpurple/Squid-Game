@@ -1,6 +1,6 @@
 import { Player} from './player.js';
 import { Doll } from './doll.js'
-import { createCamera } from './camera.js';
+import { createCamera as setCamera } from './camera.js';
 import { createLights } from './lights.js';
 import { createScene } from './scene.js';
 
@@ -16,7 +16,8 @@ class World {
     this.winMusic = new Audio('../resource/music/win.mp3')
     this.loseMusic = new Audio('../resource/music/lose.mp3')
 
-    this.camera = createCamera();
+    this.viewPoint = 0
+    this.camera = setCamera();
     this.renderer = createRenderer();
     this.loop = new Loop(this.camera, this.scene, this.renderer);
     container.append(this.renderer.domElement);
@@ -42,11 +43,10 @@ class World {
     let dollObj = this.doll.getObj()
 
     // move the target to the center of the front bird
-
+    console.log(playerObj.position)
     this.controls.target.copy(playerObj.position);
     // this.controls.target.y = 3
 
-    console.log(this.controls.target)
 
     this.scene.add(dollObj);
     this.scene.add(playerObj);
