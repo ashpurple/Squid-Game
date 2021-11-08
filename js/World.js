@@ -37,7 +37,6 @@ class World {
     this.player = new Player()
     await this.player.loadPlayer()
     let playerObj = this.player.getObj()
-
     this.doll = new Doll()
     await this.doll.loadDoll()
     let dollObj = this.doll.getObj()

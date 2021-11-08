@@ -3,7 +3,7 @@ import * as THREE from '../node_modules/three/build/three.module.js';
 
 
 let doll
-const TIME_LIMIT = 15
+const TIME_LIMIT = 30
 const text = document.querySelector('.text')
 const text_time = document.querySelector('.time')
 let DEAD_PLAYERS = 0
@@ -31,11 +31,34 @@ async function main() {
   })
 
   window.addEventListener( "keydown", function(e){
-      if(world.gameStat != "started") return
-      world.player.run()
+    if(world.gameStat != "started") return
+    const key = document.getElementById(e.key);
+    if(key){ // key press effect
+      key.classList.add("pressed")
+    }
+    if(e.key == "w"){
+      world.player.w_run()
+    }
+    if(e.key == "s"){
+      world.player.s_run()
+    }
+    if(e.key == "a"){
+      world.player.a_run()
+    }
+    if(e.key == "d"){
+      world.player.d_run()
+    }
+
   })
   window.addEventListener( "keyup", function(e){
+    const key = document.getElementById(e.key);
+    if(key){ // key press effect
+      key.classList.remove("pressed")
+    }
+    if(e.key == "w" || e.key == "s" || e.key == "a" || e.key == "d"){
       world.player.stop()
+    }
+   
   })
 
   window.addEventListener( 'resize', onWindowResize, false )
@@ -56,15 +79,15 @@ async function startDall(){
   }
 }
 
-function createCube(size, posX, rotY = 0, color = 0xfbc851){
-  const geometry = new THREE.BoxGeometry( size.w, size.h, size.d )
-  const material = new THREE.MeshBasicMaterial( { color } )
-  const cube = new THREE.Mesh( geometry, material )
-  cube.position.set(posX, 0, 0)
-  cube.rotation.y = rotY
-  world.scene.add( cube )
-  return cube
-}
+// function createCube(size, posX, rotY = 0, color = 0xfbc851){
+//   const geometry = new THREE.BoxGeometry( size.w, size.h, size.d )
+//   const material = new THREE.MeshBasicMaterial( { color } )
+//   const cube = new THREE.Mesh( geometry, material )
+//   cube.position.set(posX, 0, 0)
+//   cube.rotation.y = rotY
+//   world.scene.add( cube )
+//   return cube
+// }
 
 async function timer(time){
   var startTimer
