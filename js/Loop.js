@@ -53,11 +53,11 @@ class Loop {
   updateCamera(world){
     if(world.viewPoint == 0){ // 기본
       world.controls.target.set(1, -1, 0)
-      this.camera.position.set(0.6, 4, 6);
+      this.camera.position.set(0.6, 4, 10);
     }
     else if(world.viewPoint == 1){ // 영희
       world.controls.target.set(1, -1, 0)
-      this.camera.position.set(0.6, 3, -12);
+      this.camera.position.set(0.6, 3, -14);
     }
     else if(world.viewPoint == 3){ // 1인칭
       world.controls.target.set(0, 1 , -100);

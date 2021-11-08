@@ -80,13 +80,13 @@ class Player {
 
     update(world){
         this.check(world)
-        if(this.playerObj.position.x < -4.3){ // left wall
+        if(this.playerObj.position.x < -9){ // left wall
             this.playerObj.position.x += 0.001
         }
-        else if(this.playerObj.position.x > 4.3){ // right wall
+        else if(this.playerObj.position.x > 9){ // right wall
             this.playerObj.position.x -= 0.001
         }
-        else if(this.playerObj.position.z > 7.8){ // back wall
+        else if(this.playerObj.position.z > 8){ // back wall
             this.playerObj.position.z -= 0.001
         }
         else{
