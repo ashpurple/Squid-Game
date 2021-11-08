@@ -39,8 +39,8 @@ class Doll {
         // this.dollObj.position.set(-5, 1, 0.5)
         // this.dollObj.rotation.y = 1.6
         // this.dollObj.scale.set(0.4, 0.4, 0.4)
-        this.dollObj.position.set(0, 0, -10) //
-        this.dollObj.scale.set(0.2, 0.2, 0.2)
+        this.dollObj.position.set(0, 0.2, -13) //
+        this.dollObj.scale.set(0.25, 0.25, 0.25)
 
         // console.log(playerObj)
         //this.dollObj.position.set(start_position - .4, 1, posY)

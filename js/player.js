@@ -1,7 +1,7 @@
 import * as THREE from '../node_modules/three/build/three.module.js';
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
-const start_position = 5
+const start_position = 7
 const end_position = - 8.7
 const text = document.querySelector('.text')
 
@@ -86,7 +86,7 @@ class Player {
         else if(this.playerObj.position.x > 4.3){ // right wall
             this.playerObj.position.x -= 0.001
         }
-        else if(this.playerObj.position.z > 5.8){ // back wall
+        else if(this.playerObj.position.z > 7.8){ // back wall
             this.playerObj.position.z -= 0.001
         }
         else{

@@ -3,6 +3,7 @@ import { PerspectiveCamera } from '../node_modules/three/src/cameras/Perspective
 
 function setCamera() {
   const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
   camera.position.set(0.6, 4, 6);
   // console.log("camera: " + viewPoint)
   // if(viewPoint == 0){
@@ -15,6 +16,7 @@ function setCamera() {
   // else{
   //   camera.position.set(0, 0, 0);
   // }
+
   // camera.
   // camera.position.z = 5;
   // camera.rotation.y = 10;
