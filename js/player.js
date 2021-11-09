@@ -2,7 +2,7 @@ import * as THREE from '../node_modules/three/build/three.module.js';
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
 const start_position = 7
-const end_position = - 8.7
+const end_position = - 10.5
 const text = document.querySelector('.text')
 
 let DEAD_PLAYERS = 0
@@ -79,9 +79,9 @@ class Player {
             world.gameStat = "ended"
         }
         if(this.playerInfo.positionZ < end_position){
-            text.innerText = this.playerInfo.name + " reach the finish line!"
             this.playerInfo.isDead = true
             this.stop()
+            text.innerText = this.playerInfo.name + " reach the finish line!"
             SAFE_PLAYERS++
             world.winMusic.play()
             world.gameStat = "ended"
