@@ -1,7 +1,7 @@
 import * as THREE from '../node_modules/three/build/three.module.js';
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
-const start_position = 5
+const start_position = 7
 const end_position = - 8.7
 const text = document.querySelector('.text')
 
@@ -61,7 +61,7 @@ class Player {
                 velocity = true;
             }
         if(!dallFacingBack && velocity){
-            text.innerText = this.playerInfo.name + " lost!!!"
+            text.innerText = this.playerInfo.name + " Move!"
             this.playerInfo.isDead = true
             this.stop()
             DEAD_PLAYERS++
@@ -69,7 +69,7 @@ class Player {
             world.gameStat = "ended"
         }
         if(this.playerInfo.positionZ < end_position){
-            text.innerText = this.playerInfo.name + " is safe!!!"
+            text.innerText = this.playerInfo.name + " reach the finish line!"
             this.playerInfo.isDead = true
             this.stop()
             SAFE_PLAYERS++
@@ -80,13 +80,13 @@ class Player {
 
     update(world){
         this.check(world)
-        if(this.playerObj.position.x < -4.3){ // left wall
+        if(this.playerObj.position.x < -9){ // left wall
             this.playerObj.position.x += 0.001
         }
-        else if(this.playerObj.position.x > 4.3){ // right wall
+        else if(this.playerObj.position.x > 9){ // right wall
             this.playerObj.position.x -= 0.001
         }
-        else if(this.playerObj.position.z > 5.8){ // back wall
+        else if(this.playerObj.position.z > 8){ // back wall
             this.playerObj.position.z -= 0.001
         }
         else{
@@ -107,7 +107,6 @@ class Player {
         const playerData = await Promise.all([loader.loadAsync('../resource/player/scene.gltf')])
     
         this.playerObj = playerData["0"]["scene"];
-        // console.log(playerObj)
         this.playerObj.position.set(1, -1, 0)
         this.playerObj.rotation.y = 3.2
     }
