@@ -31,18 +31,26 @@ class Player {
     w_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.w_velocity = .03
+
+        this.action.play();
     }
     s_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.s_velocity = .03
+
+        this.action.play();
     }
     a_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.a_velocity = .03
+
+        this.action.play();
     }
     d_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.d_velocity = .03
+
+        this.action.play();
     }
 
     stop(){
@@ -50,6 +58,8 @@ class Player {
         gsap.to(this.playerInfo, { duration: .1, s_velocity: 0 })
         gsap.to(this.playerInfo, { duration: .1, a_velocity: 0 })
         gsap.to(this.playerInfo, { duration: .1, d_velocity: 0 })
+
+        this.action.stop();
     }
 
     check(world){
@@ -98,17 +108,32 @@ class Player {
             this.playerObj.position.x = this.playerInfo.positionX
             this.playerInfo.positionX += this.playerInfo.d_velocity
             this.playerObj.position.x = this.playerInfo.positionX
+
+            this.mixer.update(world.loop.delta)
         }
     }
 
     async loadPlayer(radius = .25, posY = 0, color = 0xffffff) {
         const loader = new GLTFLoader()
     
-        const playerData = await Promise.all([loader.loadAsync('../resource/player/scene.gltf')])
+        const playerData = await Promise.all([loader.loadAsync('../resource/player/scene_jogging.glb')])
+
+        console.log(playerData)
     
         this.playerObj = playerData["0"]["scene"];
         this.playerObj.position.set(1, -1, 0)
         this.playerObj.rotation.y = 3.2
+
+        this.mixer = new THREE.AnimationMixer(this.playerObj);
+        this.clips = playerData["0"]["animations"]
+        
+        console.log(this.clips)
+        this.clips.forEach((clip) => {
+            this.mixer.clipAction(clip).stop()
+        })
+
+        this.clip = THREE.AnimationClip.findByName(this.clips, "jogging")
+        this.action = this.mixer.clipAction(this.clip)
     }
 }
 
