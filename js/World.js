@@ -15,6 +15,8 @@ class World {
     this.bgMusic.loop = true
     this.winMusic = new Audio('../resource/music/win.mp3')
     this.loseMusic = new Audio('../resource/music/lose.mp3')
+    this.dollSound = new Audio('../resource/music/dollSound.mp3')
+    this.scanSound = new Audio('../resource/music/scanSound.mp3')
 
     this.viewPoint = 0
     this.camera = setCamera();

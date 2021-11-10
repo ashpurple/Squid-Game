@@ -78,10 +78,24 @@ async function main() {
 
 async function startDall(){
   if(world.gameStat != "ended"){
+    
     world.doll.lookBackward()
-    await delay((Math.random() * 1500) + 1500)
+    var backWardTime = (Math.random() * 3000 ) + 500
+    console.log("back: "+backWardTime)
+    world.dollSound.playbackRate = 4500 / backWardTime
+    world.dollSound.play()
+    await delay(backWardTime)
+    world.dollSound.pause()
+    world.dollSound.currentTime = 0
+
+    var forwardTime = (Math.random() * 1500) + 1000
+    console.log("forward: "+forwardTime)
     world.doll.lookForward()
-    await delay((Math.random() * 750) + 750)
+    world.scanSound.playbackRate = 3300 / forwardTime
+    world.scanSound.play()
+    await delay(forwardTime)
+    world.scanSound.pause()
+    world.scanSound.currentTime = 0
     startDall()
   }
 }
@@ -146,6 +160,7 @@ async function init(){
   // lookBackward()
   await delay(500)
   text.innerText = "Start"
+  //world.bgMusic.volume = 0.3
   //world.bgMusic.play() // 브금 시끄러워서 끔
   start()
 }
