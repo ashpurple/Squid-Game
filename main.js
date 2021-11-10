@@ -127,6 +127,7 @@ async function timer(time){
     }
     if(world.gameStat != "ended"){
       text_time.innerText = ts + ":" + tm
+      document.getElementById('output').innerHTML = text_time.innerText;
     }
   }, 10)
 }
@@ -143,6 +144,7 @@ function start(){
           world.loseMusic.play()
           world.gameStat = "ended"
           text_time.innerText = "00:00"
+          document.getElementById('output').innerHTML = text_time.innerText;
       }
   }, TIME_LIMIT * 1000)
   // startDall()
@@ -166,6 +168,16 @@ async function init(){
   //world.bgMusic.play() // 브금 시끄러워서 끔
   start()
 }
+
+function show () {
+  document.querySelector(".background").className = "background show";
+}
+
+function close () {
+  document.querySelector(".background").className = "background";
+}
+
+document.querySelector("#close").addEventListener("click", close);
 
 main().catch((err) => {
   console.error(err);

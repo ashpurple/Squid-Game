@@ -29,6 +29,7 @@ class Loop {
 
       if(world.gameStat == "ended") {
         this.stop()
+        document.querySelector(".background").className = "background show";
       }
     });
   }
