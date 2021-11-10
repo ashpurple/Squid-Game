@@ -79,9 +79,9 @@ async function main() {
 async function startDall(){
   if(world.gameStat != "ended"){
     world.doll.lookBackward()
-    await delay((Math.random() * 1500) + 1500)
+    await delay((Math.random() * 2000) + 2000)
     world.doll.lookForward()
-    await delay((Math.random() * 750) + 750)
+    await delay((Math.random() * 1500) + 1500)
     startDall()
   }
 }
