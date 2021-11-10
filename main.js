@@ -80,6 +80,7 @@ async function startDall(){
   if(world.gameStat != "ended"){
     
     world.doll.lookBackward()
+
     var backWardTime = (Math.random() * 3000 ) + 500
     console.log("back: "+backWardTime)
     world.dollSound.playbackRate = 4500 / backWardTime
@@ -96,6 +97,7 @@ async function startDall(){
     await delay(forwardTime)
     world.scanSound.pause()
     world.scanSound.currentTime = 0
+
     startDall()
   }
 }
