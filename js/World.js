@@ -34,7 +34,7 @@ class World {
     this.resizer = new Resizer(container, this.camera, this.renderer);
   }
 
-  async init(startBtn) {
+  async init(start_content, loading_content, main_content) {
     this.player = new Player()
     await this.player.loadPlayer()
     let playerObj = this.player.getObj()
@@ -52,8 +52,8 @@ class World {
     this.scene.add(playerObj);
 
     // this.controls.target.set(0,0,0)
-
-    startBtn.innerText = "start"
+    loading_content.style.display = "none";
+    start_content.style.display = "block";
   }
 
   render() {

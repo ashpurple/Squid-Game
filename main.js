@@ -9,7 +9,11 @@ const text = document.querySelector('.text')
 const text_time = document.querySelector('.time')
 let DEAD_PLAYERS = 0
 let SAFE_PLAYERS = 0
-const startBtn = document.querySelector('.startBtn')
+
+const oBtn = document.querySelector('.oBtn');
+const xBtn = document.querySelector('.xBtn');
+const loading_content = document.querySelector('.loading-content');
+const start_content = document.querySelector('.start-content');
 
 const container = document.querySelector('#scene-container');
 const world = new World(container);
@@ -18,18 +22,16 @@ var viewPoint = 0
 async function main() {
   // Get a reference to the container element
   // complete async tasks
-  await world.init(startBtn);
+  await world.init(start_content, loading_content);
   // start the animation loop
   world.start();
 
   const TIME_LIMIT = 15
   
-  startBtn.addEventListener('click', () => {
-      if(startBtn.innerText == "START"){
-          init()
-          document.querySelector('.modal').style.display = "none"
-          startDall()
-      }
+  oBtn.addEventListener('click', () => {
+      init()
+      document.querySelector('.modal').style.display = "none"
+      startDall()
   })
 
   window.addEventListener( "keydown", function(e){
