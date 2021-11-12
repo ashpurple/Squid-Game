@@ -6,12 +6,15 @@ const text_time = document.querySelector('.time')
 
 const oBtn = document.querySelector('.oBtn');
 const xBtn = document.querySelector('.xBtn');
+const fileLoadBtn = document.getElementById('fileLoad')
+const fileSaveBtn = document.getElementById('fileSave')
 const loading_content = document.querySelector('.loading-content');
 const start_content = document.querySelector('.start-content');
 
 const container = document.querySelector('#scene-container');
 const world = new World(container);
 var viewPoint = 0
+let textFile =""
 
 async function main() {
   // Get a reference to the container element
@@ -21,11 +24,10 @@ async function main() {
   world.start();
   
   oBtn.addEventListener('click', () => {
-      world.bgMusic.play()
-      world.bgMusic.pause()
-      init()
-      document.querySelector('.modal').style.display = "none"
-      startDall()
+    world.bgMusic.pause()
+    init()
+    document.querySelector('.modal').style.display = "none"
+    startDall()
   })
 
   window.addEventListener( "keydown", function(e){
@@ -109,10 +111,12 @@ async function startDall(){
   }
 }
 
+var flag = true
 async function timer(time){
   var startTimer
   var sec
   var milli
+  
   startTimer = setInterval(function(){
     time-=10
     sec = Math.floor(time/1000)
@@ -124,10 +128,57 @@ async function timer(time){
     }
     if(world.gameStat != "ended"){
       text_time.innerText = ts + ":" + tm
-      document.getElementById('output').innerHTML = text_time.innerText;
+    }
+    if(world.gameStat == "ended" && flag){
+      flag = false
+      scoreBoard()
     }
   }, 10)
 }
+
+function scoreBoard(){
+  let newRecord = text_time.innerText;
+  document.getElementById('output').innerHTML = newRecord;
+  fileLoadBtn.addEventListener('click', () => {
+    openTextFile(newRecord)
+  })
+}
+function openTextFile(newRecord){
+  var input = document.createElement("input")
+  input.type = "file"
+  input.accept = "text/plain, text/html, .jsp"
+  input.click()
+  input.onchange = function(event){
+    processFile(event.target.files[0], newRecord)
+  }
+}
+function processFile(file, newRecord){
+  var reader = new FileReader()
+  reader.readAsText(file, "UTF-8")
+  reader.onload = function(){
+    var newText = newRecord + "\n" + reader.result
+    document.getElementById('scoreBoard').innerHTML = newText
+    fileSaveBtn.addEventListener('click', () => {
+      download("Score.txt", newText)
+    })
+  }
+}
+
+function download(filename, text) {
+  var pom = document.createElement('a');
+  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  pom.setAttribute('download', filename);
+
+  if (document.createEvent) {
+      var event = document.createEvent('MouseEvents');
+      event.initEvent('click', true, true);
+      pom.dispatchEvent(event);
+  }
+  else {
+      pom.click();
+  }
+}
+
 
 function start(){
   world.gameStat = "started"
@@ -138,11 +189,12 @@ function start(){
           world.loseMusic.play()
           world.gameStat = "ended"
           text_time.innerText = "00:00"
-          document.getElementById('output').innerHTML = text_time.innerText;
+          //document.getElementById('output').innerHTML = text_time.innerText;
       }
   }, TIME_LIMIT * 1000)
   // startDall()
 }
+
 
 async function delay(ms){
   return new Promise(resolve => setTimeout(resolve, ms))

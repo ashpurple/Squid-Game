@@ -1,5 +1,4 @@
 import { Clock } from '../node_modules/three/src/core/Clock.js';
-import { createCamera as setCamera } from './camera.js';
 
 const clock = new Clock();
 
