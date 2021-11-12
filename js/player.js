@@ -11,6 +11,10 @@ let SAFE_PLAYERS = 0
 class Player {
     constructor(name = "Player", radius = .25, posY = 0, color = 0xffffff){
         // // ---- 캐릭터 삽입 ---- //
+        this.w = false
+        this.a = false
+        this.s = false
+        this.d = false
 
         this.playerInfo = {
             positionZ: start_position - .4,
@@ -31,35 +35,69 @@ class Player {
     w_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.w_velocity = .03
-
+        this.w = true
         this.action.play();
     }
     s_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.s_velocity = .03
-
+        this.s = true
         this.action.play();
     }
     a_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.a_velocity = .03
-
+        this.a = true
         this.action.play();
     }
     d_run(){
         if(this.playerInfo.isDead) return
         this.playerInfo.d_velocity = .03
-
+        this.d = true
         this.action.play();
     }
 
-    stop(){
+    w_stop(){
         gsap.to(this.playerInfo, { duration: .1, w_velocity: 0 })
-        gsap.to(this.playerInfo, { duration: .1, s_velocity: 0 })
+        this.w = false
+        if(this.w || this.a || this.s || this.d){
+        }
+        else{
+            this.action.stop();
+        }
+    }
+    a_stop(){
         gsap.to(this.playerInfo, { duration: .1, a_velocity: 0 })
+        this.a = false
+        if(this.w || this.a || this.s || this.d){
+        }
+        else{
+            this.action.stop();
+        }
+    }
+    s_stop(){
+        gsap.to(this.playerInfo, { duration: .1, s_velocity: 0 })
+        this.s = false
+        if(this.w || this.a || this.s || this.d){
+        }
+        else{
+            this.action.stop();
+        }
+    }
+    d_stop(){
         gsap.to(this.playerInfo, { duration: .1, d_velocity: 0 })
-
-        this.action.stop();
+        this.d = false
+        if(this.w || this.a || this.s || this.d){
+        }
+        else{
+            this.action.stop();
+        }
+    }
+    stop(){
+        this.w_stop()
+        this.a_stop()
+        this.s_stop()
+        this.d_stop()
     }
 
     check(world){

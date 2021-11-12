@@ -1,7 +1,4 @@
 import { World } from './js/World.js';
-import * as THREE from '../node_modules/three/build/three.module.js';
-import { Loop } from './js/Loop.js';
-
 
 const TIME_LIMIT = 30
 const text = document.querySelector('.text')
@@ -61,8 +58,21 @@ async function main() {
     if(key){ // key press effect
       key.classList.remove("pressed")
     }
-    if(e.key == "w" || e.key == "s" || e.key == "a" || e.key == "d"){
-      world.player.stop()
+    // if(e.key == "w" || e.key == "s" || e.key == "a" || e.key == "d"){
+    //   console.log("w stop")
+    //   world.player.stop()
+    // }
+    if(e.key == "w" ){
+      world.player.w_stop()
+    }
+    if(e.key == "s"){
+      world.player.s_stop()
+    }
+    if(e.key == "a"){
+      world.player.a_stop()
+    }
+    if( e.key == "d"){
+      world.player.d_stop()
     }
    
   })
@@ -80,8 +90,7 @@ async function startDall(){
     
     world.doll.lookBackward()
 
-    var backWardTime = (Math.random() * 3000 ) + 500
-    console.log("back: "+backWardTime)
+    var backWardTime = (Math.random() * 3000 ) + 5000//+ 500
     world.dollSound.playbackRate = 4500 / backWardTime
     world.dollSound.play()
     await delay(backWardTime)
@@ -89,7 +98,6 @@ async function startDall(){
     world.dollSound.currentTime = 0
 
     var forwardTime = (Math.random() * 1500) + 1000
-    console.log("forward: "+forwardTime)
     world.doll.lookForward()
     world.scanSound.playbackRate = 3300 / forwardTime
     world.scanSound.play()
