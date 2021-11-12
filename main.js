@@ -3,12 +3,9 @@ import * as THREE from '../node_modules/three/build/three.module.js';
 import { Loop } from './js/Loop.js';
 
 
-let doll
 const TIME_LIMIT = 30
 const text = document.querySelector('.text')
 const text_time = document.querySelector('.time')
-let DEAD_PLAYERS = 0
-let SAFE_PLAYERS = 0
 
 const oBtn = document.querySelector('.oBtn');
 const xBtn = document.querySelector('.xBtn');
@@ -104,16 +101,6 @@ async function startDall(){
   }
 }
 
-// function createCube(size, posX, rotY = 0, color = 0xfbc851){
-//   const geometry = new THREE.BoxGeometry( size.w, size.h, size.d )
-//   const material = new THREE.MeshBasicMaterial( { color } )
-//   const cube = new THREE.Mesh( geometry, material )
-//   cube.position.set(posX, 0, 0)
-//   cube.rotation.y = rotY
-//   world.scene.add( cube )
-//   return cube
-// }
-
 async function timer(time){
   var startTimer
   var sec
@@ -136,9 +123,6 @@ async function timer(time){
 
 function start(){
   world.gameStat = "started"
-  //const progressBar = createCube({w: 8, h: .1, d: 1}, 0, 0, 0xebaa12)
-  //progressBar.position.y = 3.35
-  //gsap.to(progressBar.scale, {duration: TIME_LIMIT, x: 0, ease: "none"})
   timer(TIME_LIMIT * 1000)
   setTimeout(() => {
       if(world.gameStat != "ended"){
@@ -163,7 +147,6 @@ async function init(){
   text.innerText = "2"
   await delay(500)
   text.innerText = "1"
-  // lookBackward()
   await delay(500)
   text.innerText = "Start"
   //world.bgMusic.volume = 0.3

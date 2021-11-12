@@ -14,7 +14,6 @@ class Loop {
 
   start(world) {
     this.renderer.setAnimationLoop(() => {
-      // tell every animated object to tick forward one frame
       this.tick();
       this.animate(world)
 
@@ -48,7 +47,6 @@ class Loop {
 
   animate(world){
     world.player.update(world)
-    //world.players.map(player => player.player.update()) 
   }
 
   updateCamera(world){

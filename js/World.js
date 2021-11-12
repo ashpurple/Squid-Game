@@ -47,13 +47,11 @@ class World {
     // move the target to the center of the front bird
     console.log(playerObj.position)
     this.controls.target.copy(playerObj.position);
-    // this.controls.target.y = 3
 
 
     this.scene.add(dollObj);
     this.scene.add(playerObj);
 
-    // this.controls.target.set(0,0,0)
     loading_content.style.display = "none";
     start_content.style.display = "block";
   }
