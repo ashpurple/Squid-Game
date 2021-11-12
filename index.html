@@ -13,10 +13,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=DotGothic16&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Squid Game | Red Light Green Light</title>
+    <title>Squid Game (Mugunghwa Game)</title>
 
 </head>
 <body>
+    <div id="scene-container"></div>
+     <!-- Buttons -->
+    <div class="w" id="w">W</div>
+    <div class="a" id="a">A</div>
+    <div class="s" id="s">S</div>
+    <div class="d" id="d">D</div>
+    <div class="p" id="p">P</div>
+
+    <style>
+        body{
+                font-family: 'Do Hyeon', sans-serif;            
+        }
+    </style>
     <div class="modal">
         <div class="modal-content">
             <div class="loading-content">
@@ -29,44 +42,41 @@
             </div>
         </div>
     </div>
-        <style>
-            body{
-                    font-family: 'Do Hyeon', sans-serif;            
-            }
-        </style>
-        <h1 class="text"></h1>
-        <h1 class="time">30:00</h1>
-        <div id="scene-container"></div>
+    <h1 class="text"></h1>
+    <h1 class="time">30:00</h1>
 
-        <!-- Buttons -->
-        <div class="w" id="w">W</div>
-        <div class="a" id="a">A</div>
-        <div class="s" id="s">S</div>
-        <div class="d" id="d">D</div>
-        <div class="p" id="p">P</div>
-
-    <div class="background">
-        <div class="window">
-          <div class="popup">
-              <h1 class="title2">Your Score!!</h1>
-              <p id="output"></p>
-              <button id="fileLoad" style="color: black;">Load</button>
-              <button id="fileSave" style="color: black;">Save & Retry</button>
-              <h1 class="title2">[Record]</h1>
-              <div id = scoreBoard>File is not loaded</div>
-              <form><input type="button" value="Retry" onClick="window.location.reload()"></form>
-          </div>
+    <div class="popup_container1" style="display:none">
+        <div class="retry_popup">
+        <h1>재도전 하시겠습니까?</h1>
+            <button class="oBtn" onClick="window.location.reload()"><img src="./resource/img/oBtn.png" width="50px"></input>
+                <button class="xBtn"><img src="./resource/img/xbtn.png" width="50px"></button>
         </div>
-      </div>
-
-    <div id="scene-container"></div>
-    <!-- Buttons -->
-    <div class="w" id="w">W</div>
-    <div class="a" id="a">A</div>
-    <div class="s" id="s">S</div>
-    <div class="d" id="d">D</div>
-    <div class="p" id="p">P</div>
-
+    </div>
+    
+    <div class="popup_container" style="display:none">
+    <div class="scoreboard_popup">
+             <h1 class="score_title">You survived</h1>
+            <h1 id="output" style="color:#fd1491">9:01</h1>
+            <button id="fileLoad_btn" ><img src="./resource/img/load_img.png" width="50px"><br>Load</button>
+            <button id="fileSave_btn" ><img src="./resource/img/save_img.png" width="50px"><br>Save</button>
+            <h1 class="score_title">ScoreBoard</h1>
+            <h1 class="not_load_msg">File is not loaded..</h1>
+            
+            <div class="table_container">
+                <table class="recordTable" style="display:none">
+                    <tr>
+                        <th>Rank</th>
+                        <th>Time</th>
+                    </tr>
+                    
+                    <tbody id="table_data"> 
+                        
+                    </tbody>
+                </table>
+            </div> 
+            <button class="retry_btn" onClick="window.location.reload()"><img src="./resource/img/retry.png" width="40px"></input>
+    </div>
+    </div>
     <script src="./js/module/gsap.min.js"></script>
     <script type = "module" src="./main.js"></script>
 </body>

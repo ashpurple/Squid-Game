@@ -24,11 +24,6 @@ class Loop {
       }
   
       world.render(this.scene, this.camera);
-
-      if(world.gameStat == "ended") {
-        this.stop()
-        document.querySelector(".background").className = "background show";
-      }
     });
   }
 

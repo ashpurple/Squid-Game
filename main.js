@@ -6,10 +6,12 @@ const text_time = document.querySelector('.time')
 
 const oBtn = document.querySelector('.oBtn');
 const xBtn = document.querySelector('.xBtn');
-const fileLoadBtn = document.getElementById('fileLoad')
-const fileSaveBtn = document.getElementById('fileSave')
+const fileLoadBtn = document.getElementById('fileLoad_btn')
+const fileSaveBtn = document.getElementById('fileSave_btn')
 const loading_content = document.querySelector('.loading-content');
 const start_content = document.querySelector('.start-content');
+const scoreboard_popup= document.querySelector('.popup_container');
+const retry_popup= document.querySelector('.popup_container1');
 
 const container = document.querySelector('#scene-container');
 const world = new World(container);
@@ -92,7 +94,7 @@ async function startDall(){
     
     world.doll.lookBackward()
 
-    var backWardTime = (Math.random() * 3000 ) + 5000//+ 500
+    var backWardTime = (Math.random() * 3000 ) + 500//+ 500
     world.dollSound.playbackRate = 4500 / backWardTime
     world.dollSound.play()
     await delay(backWardTime)
@@ -129,9 +131,15 @@ async function timer(time){
     if(world.gameStat != "ended"){
       text_time.innerText = ts + ":" + tm
     }
-    if(world.gameStat == "ended" && flag){
+    if(world.gameStat == "ended" && flag && world.victory){
       flag = false
+      scoreboard_popup.style.display = "block";
       scoreBoard()
+    }
+    if(world.gameStat == "ended" && flag && !world.victory){
+      flag = false
+      // failure
+      retry_popup.style.display="block";
     }
   }, 10)
 }
@@ -152,14 +160,41 @@ function openTextFile(newRecord){
     processFile(event.target.files[0], newRecord)
   }
 }
+function buildTable(data) {
+  var table = document.getElementById('table_data');
+  var sorted_data = data.sort(sortTime);
+  for (var i=0; i < sorted_data.length; i++) { 
+    var row = `<tr> 
+      <td>${i+1}</td> 
+      <td>${sorted_data[i]}</td> 
+    </tr>` 
+    table.innerHTML += row 
+  } 
+}
+
+function sortTime(a, b){
+  var sec1 = a.split(":")[0];
+  var msec1 = a.split(":")[1];
+  var sec2 = b.split(":")[0];
+  var msec2 = b.split(":")[1];
+
+  if (sec2 - sec1 == 0) {
+    return msec2 - msec1;
+  }
+  return sec2 - sec1;
+}
+
 function processFile(file, newRecord){
   var reader = new FileReader()
   reader.readAsText(file, "UTF-8")
   reader.onload = function(){
-    var newText = newRecord + "\n" + reader.result
-    document.getElementById('scoreBoard').innerHTML = newText
+    var time_string = newRecord + "\n" + reader.result
+    var time_arr = time_string.split("\n");
+    buildTable(time_arr);
+    document.querySelector(".not_load_msg").style.display="none"
+    document.querySelector(".recordTable").style.display="block"
     fileSaveBtn.addEventListener('click', () => {
-      download("Score.txt", newText)
+      download("Score.txt", time_string)
     })
   }
 }

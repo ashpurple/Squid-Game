@@ -14,10 +14,12 @@ class World {
     this.bgMusic = new Audio('../resource/music/bg.mp3')
     this.bgMusic.loop = true
     this.winMusic = new Audio('../resource/music/win.mp3')
-    this.loseMusic = new Audio('../resource/music/lose.mp3')
+    this.loseMusic = new Audio('../resource/music/gun_sound.mp3')
+    this.loseMusic.volume = 0.2
     this.dollSound = new Audio('../resource/music/dollSound.mp3')
     this.scanSound = new Audio('../resource/music/scanSound.mp3')
-
+    
+    this.victory = false
     this.viewPoint = 0
     this.camera = setCamera();
     this.renderer = createRenderer();

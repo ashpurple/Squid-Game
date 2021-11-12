@@ -123,6 +123,7 @@ class Player {
             SAFE_PLAYERS++
             world.winMusic.play()
             world.gameStat = "ended"
+            world.victory = true
         }
     }
 
