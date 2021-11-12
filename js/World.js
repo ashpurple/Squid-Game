@@ -37,6 +37,7 @@ class World {
   }
 
   async init(start_content, loading_content, main_content) {
+
     this.player = new Player()
     await this.player.loadPlayer()
     let playerObj = this.player.getObj()

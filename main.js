@@ -19,10 +19,10 @@ async function main() {
   await world.init(start_content, loading_content);
   // start the animation loop
   world.start();
-
-  const TIME_LIMIT = 15
   
   oBtn.addEventListener('click', () => {
+      world.bgMusic.play()
+      world.bgMusic.pause()
       init()
       document.querySelector('.modal').style.display = "none"
       startDall()
@@ -157,20 +157,12 @@ async function init(){
   text.innerText = "1"
   await delay(500)
   text.innerText = "Start"
-  //world.bgMusic.volume = 0.3
-  //world.bgMusic.play() // 브금 시끄러워서 끔
   start()
 }
 
 function show () {
   document.querySelector(".background").className = "background show";
 }
-
-function close () {
-  document.querySelector(".background").className = "background";
-}
-
-document.querySelector("#close").addEventListener("click", close);
 
 main().catch((err) => {
   console.error(err);
