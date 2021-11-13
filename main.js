@@ -145,7 +145,11 @@ async function timer(time){
 }
 
 function scoreBoard(){
-  let newRecord = text_time.innerText;
+  var newRecord = text_time.innerText;
+  var time_int = parseInt(newRecord.slice(0,2) + newRecord.slice(3,5));
+  var time_str = String(3000 - time_int);
+  newRecord = time_str.slice(0,2) + ':' + time_str.slice(2,4);
+
   document.getElementById('output').innerHTML = newRecord;
   fileLoadBtn.addEventListener('click', () => {
     openTextFile(newRecord)
@@ -179,9 +183,9 @@ function sortTime(a, b){
   var msec2 = b.split(":")[1];
 
   if (sec2 - sec1 == 0) {
-    return msec2 - msec1;
+    return msec1 - msec2;
   }
-  return sec2 - sec1;
+  return sec1 - sec2;
 }
 
 function processFile(file, newRecord){
