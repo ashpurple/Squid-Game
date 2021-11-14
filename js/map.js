@@ -68,24 +68,24 @@ function createRoom(scene){
 		console.error(error);
 	});
 
-    //  // Soldiers
-    // loader.load('../resource/model/soldier_scene.gltf', function(gltf){
-    //      const leftSolier_model = gltf.scene.children[0];
-    //      leftSolier_model.scale.set(0.03, 0.03, 0.03);
-    //      leftSolier_model.position.set(-4, -1, -roomHeight / 2 )
-    //      scene.add(gltf.scene);
-    //  }, undefined, function (error) {
-    //      console.error(error);
-    //  });
+     // Soldiers
+    loader.load('../resource/model/soldier_scene.gltf', function(gltf){
+         const leftSolier_model = gltf.scene.children[0];
+         leftSolier_model.scale.set(0.03, 0.03, 0.03);
+         leftSolier_model.position.set(-4, -1, -roomHeight / 2 )
+         scene.add(gltf.scene);
+     }, undefined, function (error) {
+         console.error(error);
+     });
 
-    // loader.load('../resource/model/soldier_scene.gltf', function(gltf){
-    //     const rightSolier_model = gltf.scene.children[0];
-    //     rightSolier_model.scale.set(0.03, 0.03, 0.03);
-    //     rightSolier_model.position.set(4, -1, -roomHeight / 2 )
-    //     scene.add(gltf.scene);
-    // }, undefined, function (error) {
-    //     console.error(error);
-    // });
+    loader.load('../resource/model/soldier_scene.gltf', function(gltf){
+        const rightSolier_model = gltf.scene.children[0];
+        rightSolier_model.scale.set(0.03, 0.03, 0.03);
+        rightSolier_model.position.set(4, -1, -roomHeight / 2 )
+        scene.add(gltf.scene);
+    }, undefined, function (error) {
+        console.error(error);
+    });
 }
 
 export {createRoom}
